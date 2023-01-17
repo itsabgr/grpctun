@@ -1,0 +1,16 @@
+syntax = "proto3";
+option go_package = "pkg/proto";
+
+service Proxy{
+  rpc ConnectTCP(stream StreamMessage) returns (stream StreamMessage);
+  rpc BindUDP(stream PacketMessage) returns (stream PacketMessage);
+}
+
+message PacketMessage{
+  string Origin = 1;
+  bytes Data = 2;
+}
+
+message StreamMessage{
+  bytes Data = 1;
+}

@@ -1,0 +1,22 @@
+name: grpctun
+version: '0.1.0'
+summary: grpc-based proxy server
+description: grpc-based proxy server
+confinement: strict
+base: core20
+
+parts:
+  grpctun:
+    plugin: go
+    source: https://github.com/itsabgr/grpctun
+    source-type: git
+
+apps:
+  grpctun-server:
+    daemon: simple
+    command: go run ./cmd/grpctun-server
+    stop-timeout: 2s
+    stop-mode: sigterm
+    install-mode: enable
+    plugs:
+      - network-bind
